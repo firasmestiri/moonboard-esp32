@@ -45,5 +45,5 @@ LEDs are originally arranged in a zig-zag (snake) pattern from **0 to 149**, thi
 
 
 ## 📄 License
-MIT License (or any license you prefer)
+MIT License
 
