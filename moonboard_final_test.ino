@@ -516,7 +516,7 @@ void setup() {
     Serial.println("Available commands:");
     Serial.println("TEST - Test all LEDs");
     Serial.println("TEST_MAP - Test coordinate mapping");
-    Serial.println("COORD x,y - Light up specific coordinate");
+    Serial.println("COORD x,y[,type] - Light up coordinate (type: H/HAND=white, F/FOOT=red, S/START/E/END=green)");
     Serial.println("RAINBOW - Rainbow pattern");
     Serial.println("R1-R5 - Legacy routes");
     Serial.println("ROUTE1 - Basic example route");
@@ -546,8 +546,32 @@ void loop() {
             int commaPos = coords.indexOf(',');
             if (commaPos > 0) {
                 int x = coords.substring(0, commaPos).toInt();
-                int y = coords.substring(commaPos + 1).toInt();
-                showCoordinate(x, y, CRGB::White);
+                String remainder = coords.substring(commaPos + 1);
+
+                // Check for optional hold type parameter
+                int secondCommaPos = remainder.indexOf(',');
+                int y;
+                CRGB color = CRGB::White; // Default to hand hold (white)
+
+                if (secondCommaPos > 0) {
+                    y = remainder.substring(0, secondCommaPos).toInt();
+                    String holdType = remainder.substring(secondCommaPos + 1);
+                    holdType.trim();
+                    holdType.toUpperCase();
+
+                    // Set color based on hold type
+                    if (holdType == "F" || holdType == "FOOT") {
+                        color = CRGB::Red;  // Foot hold
+                    } else if (holdType == "S" || holdType == "START" || holdType == "E" || holdType == "END"  ) {
+                        color = CRGB::Green;  // Start hold
+                    } else {
+                        color = CRGB::White;  // Hand hold (default or explicit H/HAND)
+                    }
+                } else {
+                    y = remainder.toInt();
+                }
+
+                showCoordinate(x, y, color);
             }
         } else if (command == "RAINBOW") {
             rainbowEffect();
