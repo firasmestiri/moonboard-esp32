@@ -516,7 +516,7 @@ void setup() {
     Serial.println("Available commands:");
     Serial.println("TEST - Test all LEDs");
     Serial.println("TEST_MAP - Test coordinate mapping");
-    Serial.println("COORD x,y[,type] - Light up coordinate (type: H/HAND=white, F/FOOT=red, S/START/E/END=green)");
+    Serial.println("COORD x,y[,type] - Light up coordinate (type: H/HAND=white, F/FOOT=red, S/START/E/END=green, C/CLEAR=off)");
     Serial.println("RAINBOW - Rainbow pattern");
     Serial.println("R1-R5 - Legacy routes");
     Serial.println("ROUTE1 - Basic example route");
@@ -564,6 +564,8 @@ void loop() {
                         color = CRGB::Red;  // Foot hold
                     } else if (holdType == "S" || holdType == "START" || holdType == "E" || holdType == "END"  ) {
                         color = CRGB::Green;  // Start hold
+                    } else if (holdType == "C" || holdType == "CLEAR") {
+                        color = CRGB::Black;  // Clear hold (turn off)
                     } else {
                         color = CRGB::White;  // Hand hold (default or explicit H/HAND)
                     }
