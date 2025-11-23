@@ -3,9 +3,10 @@
 This project controls a MoonBoard-style LED setup using an ESP32 on an overhanging climbing wall.  
 LEDs are originally arranged in a zig-zag (snake) pattern from **0 to 149**, this code handles the pattern and makes it easier to understand and use by making the leds follow (x,y) axis
 
+
 ## 🔧 Features
 - Control LEDs under each climbing hold
-- Bluetooth serial communication (tested with Android app called 'Serial Bluetooth Terminal' by Kai Morich)
+- Bluetooth serial communication (tested with Android app called 'Serial Bluetooth Terminal' by Kai Morich) *the current BT serial communication support Android only, IOS support will hopefully be implemented in future updates*
 - Simple protocol for lighting sequences or problems
 
 ## 📁 File Structure
